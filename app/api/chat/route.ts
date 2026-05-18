@@ -33,7 +33,7 @@ export async function POST(request: Request) {
           content: message,
         },
       ],
-      model: 'llama3-8b-8192', // You can change the model here (e.g. mixtral-8x7b-32768, llama3-70b-8192)
+      model: 'llama-3.1-8b-instant', // Fixed model name
       temperature: 0.7,
       max_tokens: 1024,
     });
