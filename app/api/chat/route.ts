@@ -1,13 +1,17 @@
 import { NextResponse } from 'next/server';
 import Groq from 'groq-sdk';
 
-// Initialize Groq SDK with the API key from environment variables
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+// We will initialize the Groq client inside the POST function
+// to prevent build errors on Vercel if the API key is missing during build time.
+
 
 export async function POST(request: Request) {
   try {
+    // Initialize Groq SDK with the API key from environment variables
+    const groq = new Groq({
+      apiKey: process.env.GROQ_API_KEY || '', // fallback to prevent crash if missing
+    });
+
     const { message } = await request.json();
 
     if (!message) {
